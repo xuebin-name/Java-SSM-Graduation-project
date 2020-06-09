@@ -1,0 +1,28 @@
+.log-list {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+.log-item {
+  margin: 10rpx;
+}
+.timu{
+  text-align: center;
+  font-family: KaiTi;
+}
+.page__bd{
+  display: flex;
+  flex-direction: row;
+  padding: 40rpx;
+}
+.xuanxiang{
+  border: 1px solid black;
+  background: white;
+  border-radius: 50px 50px 50px 50px;
+  size: mini;
+  width: 200px;
+  height: 40px;
+  margin-top: 20px;
+  font-family: KaiTi;
+  margin-left: 50px;
+}

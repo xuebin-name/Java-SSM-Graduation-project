@@ -1,0 +1,66 @@
+{
+  "pages": [
+    
+    
+    "pages/index/index",
+    "pages/logs/logs","pages/order_list/orderlist",
+    "pages/list/list",
+    
+    "pages/map/map","pages/index_list/showlist",
+    "custom/form_test",
+    "pages/chuyu/chuyu",
+    "pages/youhai/youhai",
+    "pages/qita/qita",
+    "component/popul/popup",
+    "pages/lianxi/lianxi"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息"
+    }
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#6F5DE4",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "暖暖垃圾分类",
+    "backgroundColor": "#DDEF58",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "pages/static/image/icon/zhuye.png",
+        "selectedIconPath": "pages/static/image/icon/zhuye.png"
+      },
+      {
+        "pagePath": "pages/list/list",
+        "text": "分类",
+        "iconPath": "pages/static/image/icon/fenlei.png",
+        "selectedIconPath": "pages/static/image/icon/zhuye.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "测试",
+        "iconPath": "pages/static/image/icon/ceshi.png",
+        "selectedIconPath": "pages/static/image/icon/zhuye.png"
+      },
+      {
+        "pagePath": "pages/map/map",
+        "text": "图文",
+        "iconPath": "pages/static/image/icon/tuwen_o.png",
+        "selectedIconPath": "pages/static/image/icon/zhuye.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap40.json",
+  "component": true,
+  "usingComponents": {
+    "mp-tabbar": "../component/tabbar/tabbar",
+    "mp-form": "../component/form/form",
+    "mp-cells": "../component/cells/cells",
+    "mp-cell": "../component/cell/cell"
+  }
+}

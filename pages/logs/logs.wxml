@@ -1,0 +1,39 @@
+<!--logs.wxml-->
+<mp-toptips msg="{{msg}}" type="{{msgtitle}}" show="{{msg}}"></mp-toptips>
+<mp-toptips msg="{{result}}" type="{{msgtitle}}" show="{{result}}"></mp-toptips>
+<view class="body">
+  <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__hd">
+      <form bindsubmit="formSubmit">
+          <view>
+            <mp-cells>
+              <mp-cell>
+                <view class="timu">
+                    <text id="{{csText[0].csId}}">{{text}}</text>
+                    
+                </view>
+              </mp-cell>
+              <view class="page__bd">
+              <view class="section section_gap">
+                <view >
+                  <button class="xuanxiang" plain="true" name="xuanze"id="1" value="{{list.csId}}" bindtap="click">可回收垃圾</button>
+                  <button class="xuanxiang" plain="true" name="xuanze"id="2" value="{{list.csId}}" bindtap="click">有害垃圾</button>
+                  <button class="xuanxiang" plain="true" name="xuanze"id="3" value="{{list.csId}}" bindtap="click">厨余（湿）垃圾</button>
+                  <button class="xuanxiang" plain="true" name="xuanze"id="4" value="{{list.csId}}" bindtap="click">其他（干）垃圾</button>
+                </view>
+                <!---<radio-group class="radio-group" bindchange="radioChange">
+                  <mp-cell>
+                    <radio class="radio" wx:for-items="{{list[0].typeModel}}" wx:key="name" value="{{item.typeName}}" checked="{{item.checked}}">
+                    <button class="xuanxiang" plain="true" name="xuanze"id="{{list[0].csId}}" value="{{list[0].csId}}" bindtap="click">{{item.typeName}}</button>
+                      
+                    </radio>
+                  </mp-cell>
+                </radio-group>-->
+                </view>
+              </view>
+              </mp-cells>
+          </view>
+      </form>
+    </view>
+  </view>
+</view>

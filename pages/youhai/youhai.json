@@ -1,0 +1,30 @@
+{
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "pages/static/image/icon/zhuye.png",
+        "selectedIconPath": "pages/static/image/icon/zhuye.png"
+      },
+      {
+        "pagePath": "pages/list/list",
+        "text": "分类",
+        "iconPath": "pages/static/image/icon/fenlei.png",
+        "selectedIconPath": "pages/static/image/icon/zhuye.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "测试",
+        "iconPath": "pages/static/image/icon/ceshi.png",
+        "selectedIconPath": "pages/static/image/icon/zhuye.png"
+      },
+      {
+        "pagePath": "pages/map/map",
+        "text": "图文",
+        "iconPath": "pages/static/image/icon/tuwen_o.png",
+        "selectedIconPath": "pages/static/image/icon/zhuye.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  
+  "component": true,
+  "usingComponents": {
+    "mp-cells": "../../component/cells/cells",
+    "mp-cell": "../../component/cell/cell",
+    "mp-form": "../../component/form/form",
+    "mp-gallery": "/miniprogram_npm/weui-miniprogram/gallery/gallery"
+  }
+}

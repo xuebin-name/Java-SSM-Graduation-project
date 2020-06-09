@@ -1,0 +1,9 @@
+
+    <image src="/pages/static/image/tuwen.jpg" bindload="imageLoad" data-index="{{ index }}" 
+    style="width:{{ width }}rpx; height:{{height }}rpx;"></image>
+<view slot="footer">
+  <view class="weui-footer__links">
+    <navigator url="/pages/lianxi/lianxi" class="weui-footer__link">联系我们</navigator>
+  </view>
+  <view class="weui-footer__text">xueybinx@163.com</view>
+</view>

@@ -1,0 +1,33 @@
+/* pages/index_list/showlist.wxss */
+
+.body{
+font-family: "KaiTi";
+}
+.tubiao{
+  width: 50px;
+  height: 50px;
+}
+.top01{
+  font-family: "KaiTi";
+  color:  darkorange;
+}
+.top02{
+  font-family: "KaiTi";
+  color: green;
+}
+.top03{
+  font-family: "KaiTi";
+  color:  blue;
+}
+.top04{
+  font-family: "KaiTi";
+  color: orangered;
+}
+.top05{
+  font-family: "KaiTi";
+  color: red;
+}
+.top06{
+  font-family: "KaiTi";
+  color:  coral;
+}

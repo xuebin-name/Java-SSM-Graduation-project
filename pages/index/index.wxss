@@ -1,0 +1,37 @@
+
+
+
+.indexContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: KaiTi;
+}
+.touxiang{
+  width: 100px;
+  height: 100px;
+}
+.tupian {
+  
+  width: 100%px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+.yuyue button{
+  background-color: rgba(255, 255, 255, 0.911);
+  width: 100%;
+  font-family: KaiTi;
+  border-radius: 20%;
+}
+
+
+.tupian image{
+  width: 200rpx;
+  height: 200rpx;
+  align-items: center;
+}
+
+.searchbar-result{margin-top:0;font-size:14px}.searchbar-result .weui-cell__bd{padding:1px 0 1px 10px;color:var(--weui-FG-1)}.searchbar-result:before{display:none}
+

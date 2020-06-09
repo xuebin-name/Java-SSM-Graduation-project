@@ -1,0 +1,33 @@
+<!--pages/index_list/showlist.wxml-->
+<view class="body">
+  <view class="top01">
+  <mp-cells>
+  <mp-cell title="名称：">
+  <text>{{list.rubbishName}}</text> 
+  <view slot="footer" wx:if="{{list.typeId==1}}">
+    <image class="tubiao" src="/pages/static/image/huishou.png"></image>
+  </view>
+  <view slot="footer" wx:if="{{list.typeId==2}}">
+    <image class="tubiao" src="/pages/static/image/youhai.png"></image>
+  </view>
+  <view slot="footer" wx:if="{{list.typeId==3}}">
+    <image class="tubiao" src="/pages/static/image/chuyu.png"></image>
+  </view>
+  <view slot="footer" wx:if="{{list.typeId==4}}">
+    <image class="tubiao" src="/pages/static/image/qita.png"></image>
+  </view>
+  </mp-cell>
+  
+  <mp-cell title="名称：">
+  <text>{{list.rubbishTitle}}</text> 
+  
+  </mp-cell>
+  </mp-cells></view>
+  <view class="top02"><text>详情：{{list.typeModel.typeName}}</text></view>
+  <view class="top03"><text>分类解释：{{list.typeModel.typeDatil}}</text></view>
+  <view class="top04"><text>包含类型：{{list.typeModel.typeInclude}}</text></view>
+  <view class="top05"><text>投放提示：</text></view>
+  <view class="top06">
+    <text class="prompt" wx:for="{{list.typeModel.throwClaims}}"wx:key="key">{{item.throwPrompt}}\n</text>
+  </view>
+</view>

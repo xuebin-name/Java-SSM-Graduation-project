@@ -1,0 +1,29 @@
+
+
+
+  <view class="tupian">
+    <image src="../static/image/icon/lajitong.png"></image>
+  </view>
+
+    <view class="yuyue"> <button class="ybtn"  bindtap="order">预约</button> </view>
+      <view class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}" id="searchBar">
+          <form class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+              <i class="weui-icon-search"></i>
+                        <input type="text" class="weui-search-bar__input" placeholder="垃圾搜索" value="{{inputVal}}" focus="{{inputShowed}}"  bindconfirm="search" data-flag="{{inputVal}}" confirm-type="search" />
+                        <!--- 搜索框×图标--->
+                        
+                        <span class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></span>
+            </view>
+            <!---搜索框初始文本显示-->
+            <label class="weui-search-bar__label" bindtap="showInput">
+              <i class="weui-icon-search"></i>
+                        <span class="weui-search-bar__text">垃圾搜索</span>
+            </label>
+          </form>
+                <view class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view>
+      </view>
+    <mp-dialog title="授权" show="{{showOneButtonDialog}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+        <view>请授权登陆</view>
+        <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    </mp-dialog>

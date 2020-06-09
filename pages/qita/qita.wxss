@@ -1,0 +1,53 @@
+/* pages/list/list.wxss */
+
+.leixing text{
+  font-size: 20px;
+  font-family: "KaiTi";
+  color:coral;
+}
+.tubiao{
+     width: 50px;
+  height: 50px;
+}
+.chuyu{
+margin-left: 20px;
+}
+.youhai{
+margin-left: 20px;
+}
+.qita{
+margin-left: 20px;
+}
+.btn-area{
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+  font-family: "KaiTi";
+}
+.miaoshu text{
+  font-family: "KaiTi";
+  font-size: 15px;
+  color:coral;
+}
+.tf{
+  display: flex;
+  align-items: center;
+  font-family: "KaiTi";
+  font-size: 15px;
+  background-color: coral;
+  
+}
+.shouye{
+  width: 30px;
+  height: 30px;
+}
+.fist{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-left: 40px;
+}
+.prompt{
+  color: coral;
+  font-size: 20px;
+}

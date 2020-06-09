@@ -1,0 +1,7 @@
+<!--pages/lianxi/lianxi.wxml-->
+<view class="page">
+ <mp-msg type="success" title="欢迎您提出宝贵意见">
+        <view slot="desc">由于本小程序还在测试阶段，欢迎广大用户朋友提出改善和修改的建议,请发送到邮箱：<navigator url="https://mail.163.com/" class="weui-msg__link">xueybinx@163.com</navigator></view>
+         
+    </mp-msg>
+</view>

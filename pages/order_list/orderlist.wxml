@@ -1,0 +1,71 @@
+<!--pages/order_list/orderlist.wxml-->
+<view class="body">
+  <view class="title"> <text>预约单详细信息填写</text> </view>
+  <view class="biaodan">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+    <mp-form id="form">
+     <mp-cells>
+      <mp-cell  title="姓名" name="name">
+          <input name="userName"  class="weui-input" placeholder="请输入姓名"/>
+      </mp-cell>
+       
+      <mp-cell  title="电话" name="phone">
+          <input name="userPhone"  class="weui-input" placeholder="请输入电话"/>
+      </mp-cell>
+      
+      
+
+      </mp-cells>
+
+      <view class="section">
+      <mp-cells>
+      <view class="section__title">请选择省份城市区域</view>
+      <picker mode="region" bindchange="bindRegionChange" value="{{province}}" custom-item="{{customItem}}">
+        <view class="picker">
+          当前选择：
+          <view class="quyu">
+          <mp-cell class="quyu">
+           省份：{{seleceprovince}}
+           城市：{{selectcity}}
+           区域：{{selecturban}}
+          </mp-cell>
+          <!--- 
+          <input class="province" name="province" type="text" value=""></input>
+          <input class="province" name="city" type="text" value="{{selectcity}}" ></input>
+          <input class="province" name="area" type="text" value="{{selecturban}}" ></input>
+          -->
+          </view>
+          
+        </view>
+      </picker>
+      <mp-cell title="详细地址：">
+<input type="text" name="userAddress"value="{{seleceprovince}}{{selectcity}}{{selecturban}}" class="xiangxi"></input>
+      </mp-cell>
+      </mp-cells>
+      
+       </view>
+    <view class="btn-area">
+    <view class="botom">
+ 
+    <view class="tijiao">
+    <button formType="submit"class="weui-btn" id="1" bindtap="tapOneDialogButton" type="primary">提交</button>
+    
+    </view>
+    <view class="chongzhi">
+    <button formType="reset" class="weui-btn" type="primary">重置</button>
+    </view>
+    <view class="quxiao">
+    <button  class="weui-btn" bindtap="cancle" type="primary">取消</button>
+    </view>
+    </view>
+    
+  </view>
+   </mp-form>
+    </form>
+     <view class="weui-btn-area">
+        </view>
+      <mp-dialog title="{{msg}}" show="{{showOneButtonDialog}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+        <view>{{msg}}</view>
+    </mp-dialog>
+  </view>
+</view>

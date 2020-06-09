@@ -1,0 +1,44 @@
+<view >
+<view class="btn-area">
+  <navigator  url="/pages/list/list" open-type="switchTab" hover-class="other-navigator-hover">可回收垃圾</navigator>
+  <navigator class="youhai" url="../youhai/youhai" open-type="redirect" hover-class="other-navigator-hover">有害垃圾</navigator>
+    <navigator class="chuyu" url="../chuyu/chuyu" open-type="redirect" hover-class="other-navigator-hover">厨余（湿）垃圾</navigator>
+      <navigator class="qita" url="../qita/qita" open-type="redirect" hover-class="other-navigator-hover">其他（干）垃圾</navigator>
+</view></view>
+
+
+<view class="leixing">
+<mp-cells>
+<mp-cell title="类型：">
+<view ><text>{{list[1].typeName}}</text> </view>
+<view  slot="footer">
+    <image class="tubiao" src="/pages/static/image/youhai.png"></image>
+  </view>
+ </mp-cell>
+  <view class="miaoshu">
+  <mp-cell title="描述：">
+  <text>{{list[1].typeDatil}}</text> 
+  </mp-cell>
+    <view class="include">
+      <text>包含类型：{{list[1].typeInclude}}</text>
+    </view>
+  <mp-cell>
+    <view class="tf"><text style="color:white">投放要求\n</text></view>
+    <view>
+    <text class="prompt" wx:for="{{list[1].throwClaims}}"wx:key="key">{{item.throwPrompt}}\n</text>
+     </view>
+     </mp-cell>
+     
+  </view>
+  </mp-cells>
+</view>
+
+<view>
+<view class="btn-area">
+  <navigator class="fist" url="/pages/index/index" open-type="switchTab" hover-class="other-navigator-hover">
+  <icon ><image class="shouye" src="/pages/static/image/icon/zhuye.png"></image></icon> 首页</navigator>
+  <navigator class="fist" url="/pages/list/list" open-type="switchTab" hover-class="other-navigator-hover">
+  <icon ><image class="shouye" src="/pages/static/image/icon/fenlei.png"></image></icon>分类</navigator>
+    <navigator class="fist"url="/pages/logs/logs" open-type="switchTab" hover-class="other-navigator-hover"><icon ><image class="shouye" src="/pages/static/image/icon/ceshi.png"></image></icon>测试</navigator>
+      <navigator class="fist" url="/pages/map/map" open-type="switchTab" hover-class="other-navigator-hover"><icon ><image class="shouye" src="/pages/static/image/icon/tuwen_o.png"></image></icon>图文</navigator>
+</view></view>

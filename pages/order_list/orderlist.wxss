@@ -1,0 +1,132 @@
+/* pages/order_list/orderlist.wxss */
+.indexContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: KaiTi;
+}
+.body{
+  text-align: left;
+  
+}
+.botom{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+.tijiao{
+  width: 100px;
+  height: 40px;
+}
+.quxiao{
+  width: 100px;
+  height: 40px;
+
+}
+.quxiao button{
+  width: 100px;
+  height: 40px;
+  margin-left: 10px;
+}
+.tijiao button{
+  width: 100px;
+  height: 40px;
+  margin-left: 5px;
+}
+.chongzhi{
+  width: 100px;
+  height: 40px;
+  margin-left: 10px;
+}
+.chongzhi button{
+  width: 100px;
+  height: 40px;
+  margin-left: 3px;
+}
+.cancle{
+  margin-top: 20px;
+}
+.title{
+  font-family: "KaiTi";
+  text-align: center;
+  margin-top: 20px;
+}
+.biaodan{
+  margin-top: 50px;
+  font-family: "KaiTi";
+}
+.quyu{
+  display: flex;
+  flex-direction: row;
+  font-family: "KaiTi";
+}
+.shengfen{
+  display: flex;
+  flex-direction: row;
+  font-family: "KaiTi";
+}
+.chengshi{
+  display: flex;
+  flex-direction: row;
+  font-family: "KaiTi";
+}
+.area{
+  display: flex;
+  flex-direction: row;
+  font-family: "KaiTi";
+}
+.address{
+  display: flex;
+  flex-direction: row;
+  font-family: "KaiTi";
+}
+.xingm{
+font-family: KaiTi;
+margin-left: 20px;
+}
+.phoneview{
+font-family: KaiTi;
+margin-left: 20px;
+
+}
+.section{
+  font-family: KaiTi;
+}
+.shuruname{
+text-align: center;
+margin-left: 20px;
+    /*border: 1px solid black;*/
+
+}
+.shuruphone{
+text-align: center;
+margin-left: 20px;
+}
+.name{
+  width: 200px;
+  height: 50rpx;
+  /*border:1px solid black;*/
+  margin-left: 20px;
+  border-radius: 20%
+}
+.phone{
+  width: 200px;
+  height: 50rpx;
+  margin-left: 20px;
+  /*border:1px solid black;*/
+  border-radius: 20%
+}
+.province{
+  /*border: 1px solid black;*/
+  font-family: "KaiTi";
+  width: 50px;
+  height: 50rpx;
+  border-radius: 20%;
+}
+.xiangxi{
+  /*border: 1px solid black;*/
+  font-family: "KaiTi";
+  width: 200px;
+  height: 50rpx;
+  border-radius: 20%;
+}
