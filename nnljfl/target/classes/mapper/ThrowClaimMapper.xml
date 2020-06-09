@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nnljfl.dao.ThrowClaimMapper">
+  <resultMap id="BaseResultMap" type="com.nnljfl.bean.ThrowClaim">
+    <id column="throw_id" jdbcType="INTEGER" property="throwId" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="throw_title" jdbcType="VARCHAR" property="throwTitle" />
+    <result column="throw_datils" jdbcType="VARCHAR" property="throwDatils" />
+    <result column="throw_prompt" jdbcType="VARCHAR" property="throwPrompt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    throw_id, type_id, throw_title, throw_datils, throw_prompt
+  </sql>
+  <select id="selectByExample" parameterType="com.nnljfl.bean.ThrowClaimExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from throwclaim
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from throwclaim
+    where throw_id = #{throwId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from throwclaim
+    where throw_id = #{throwId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nnljfl.bean.ThrowClaimExample">
+    delete from throwclaim
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nnljfl.bean.ThrowClaim">
+    insert into throwclaim (throw_id, type_id, throw_title, 
+      throw_datils, throw_prompt)
+    values (#{throwId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{throwTitle,jdbcType=VARCHAR}, 
+      #{throwDatils,jdbcType=VARCHAR}, #{throwPrompt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nnljfl.bean.ThrowClaim">
+    insert into throwclaim
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="throwId != null">
+        throw_id,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="throwTitle != null">
+        throw_title,
+      </if>
+      <if test="throwDatils != null">
+        throw_datils,
+      </if>
+      <if test="throwPrompt != null">
+        throw_prompt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="throwId != null">
+        #{throwId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="throwTitle != null">
+        #{throwTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="throwDatils != null">
+        #{throwDatils,jdbcType=VARCHAR},
+      </if>
+      <if test="throwPrompt != null">
+        #{throwPrompt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nnljfl.bean.ThrowClaimExample" resultType="java.lang.Long">
+    select count(*) from throwclaim
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update throwclaim
+    <set>
+      <if test="record.throwId != null">
+        throw_id = #{record.throwId,jdbcType=INTEGER},
+      </if>
+      <if test="record.typeId != null">
+        type_id = #{record.typeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.throwTitle != null">
+        throw_title = #{record.throwTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.throwDatils != null">
+        throw_datils = #{record.throwDatils,jdbcType=VARCHAR},
+      </if>
+      <if test="record.throwPrompt != null">
+        throw_prompt = #{record.throwPrompt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update throwclaim
+    set throw_id = #{record.throwId,jdbcType=INTEGER},
+      type_id = #{record.typeId,jdbcType=INTEGER},
+      throw_title = #{record.throwTitle,jdbcType=VARCHAR},
+      throw_datils = #{record.throwDatils,jdbcType=VARCHAR},
+      throw_prompt = #{record.throwPrompt,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nnljfl.bean.ThrowClaim">
+    update throwclaim
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="throwTitle != null">
+        throw_title = #{throwTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="throwDatils != null">
+        throw_datils = #{throwDatils,jdbcType=VARCHAR},
+      </if>
+      <if test="throwPrompt != null">
+        throw_prompt = #{throwPrompt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where throw_id = #{throwId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nnljfl.bean.ThrowClaim">
+    update throwclaim
+    set type_id = #{typeId,jdbcType=INTEGER},
+      throw_title = #{throwTitle,jdbcType=VARCHAR},
+      throw_datils = #{throwDatils,jdbcType=VARCHAR},
+      throw_prompt = #{throwPrompt,jdbcType=VARCHAR}
+    where throw_id = #{throwId,jdbcType=INTEGER}
+  </update>
+</mapper>

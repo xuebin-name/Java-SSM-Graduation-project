@@ -1,0 +1,34 @@
+/*index.css*/
+.index .mui-pull{
+	color: #FFFFFF;
+}
+.index #map {
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	bottom: 70px;
+	line-height: 200px;
+	text-align: center;
+	background: #FFFFFF;
+}
+
+/*bracode.css*/
+.bracode button{
+	margin: 10px;
+	font-size: 15px;
+	width: 150px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.bracode *{
+	-webkit-user-select: none;
+}
+.bracode html,.bracode body{
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+}
+.bracode #bcid{
+	width: 360px;
+	height: 480px;
+}

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nnljfl.dao.RubbishMapper">
+  <resultMap id="BaseResultMap" type="com.nnljfl.bean.Rubbish">
+    <id column="rubbish_id" jdbcType="INTEGER" property="rubbishId" />
+    <result column="rubbish_name" jdbcType="VARCHAR" property="rubbishName" />
+    <result column="rubbish_title" jdbcType="VARCHAR" property="rubbishTitle" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+  </resultMap>
+  <resultMap id="WithTypeResultMap" type="com.nnljfl.bean.Rubbish">
+     <id column="rubbish_id" jdbcType="INTEGER" property="rubbishId" />
+    <result column="rubbish_name" jdbcType="VARCHAR" property="rubbishName" />
+    <result column="rubbish_title" jdbcType="VARCHAR" property="rubbishTitle" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+
+  	<collection  property="typeModel" javaType="com.nnljfl.bean.TypeModel">
+  	<id column="type_id" property="typeId"/>
+  	<result column="type_name" property="typeName"/>
+  	<result column="type_datil" property="typeDatil"/>
+  	<result column="type_include" property="typeInclude"/>
+	  	<collection property="throwClaims" ofType="com.nnljfl.bean.ThrowClaim">
+	  	    <id column="throw_id" property="throwId"/>
+	  		<result column="throw_prompt" property="throwPrompt"/>
+	  	</collection>
+  	</collection >
+
+    </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    rubbish_id, rubbish_name, rubbish_title, type_id
+  </sql>
+      <sql id="WithType_Column_List">
+   r.rubbish_id, r.rubbish_name, r.rubbish_title,r.type_id,t.type_name,t.type_datil,t.type_include,h.throw_prompt
+  </sql>
+  <!-- 查询垃圾带类型 -->
+    <select id="selectByExampleAll"  resultMap="WithTypeResultMap" >
+   select
+    <include refid="WithType_Column_List" />
+   from rubbish r left join typemodel t on r.type_id=t.type_id left join throwclaim h 
+   on t.type_id =h.type_id group by r.rubbish_id ASC
+  </select>
+
+<select id="selectByExampleWithType"  resultMap="WithTypeResultMap" parameterType="java.lang.String">
+   select
+    <include refid="WithType_Column_List" />
+  from rubbish r left join typemodel  t on r.type_id=t.type_id left join throwclaim h on t.type_id=h.type_id
+      where
+    r.rubbish_name like concat('%',#{name},'%')
+  </select>
+  <select id="selectByExample" parameterType="com.nnljfl.bean.RubbishExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rubbish
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rubbish
+    where rubbish_id = #{rubbishId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rubbish
+    where rubbish_id = #{rubbishId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nnljfl.bean.RubbishExample">
+    delete from rubbish
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nnljfl.bean.Rubbish">
+    insert into rubbish (rubbish_id, rubbish_name, rubbish_title, 
+      type_id)
+    values (#{rubbishId,jdbcType=INTEGER}, #{rubbishName,jdbcType=VARCHAR}, #{rubbishTitle,jdbcType=VARCHAR}, 
+      #{typeId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nnljfl.bean.Rubbish">
+    insert into rubbish
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rubbishId != null">
+        rubbish_id,
+      </if>
+      <if test="rubbishName != null">
+        rubbish_name,
+      </if>
+      <if test="rubbishTitle != null">
+        rubbish_title,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rubbishId != null">
+        #{rubbishId,jdbcType=INTEGER},
+      </if>
+      <if test="rubbishName != null">
+        #{rubbishName,jdbcType=VARCHAR},
+      </if>
+      <if test="rubbishTitle != null">
+        #{rubbishTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nnljfl.bean.RubbishExample" resultType="java.lang.Long">
+    select count(*) from rubbish
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rubbish
+    <set>
+      <if test="record.rubbishId != null">
+        rubbish_id = #{record.rubbishId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rubbishName != null">
+        rubbish_name = #{record.rubbishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rubbishTitle != null">
+        rubbish_title = #{record.rubbishTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null">
+        type_id = #{record.typeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rubbish
+    set rubbish_id = #{record.rubbishId,jdbcType=INTEGER},
+      rubbish_name = #{record.rubbishName,jdbcType=VARCHAR},
+      rubbish_title = #{record.rubbishTitle,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nnljfl.bean.Rubbish">
+    update rubbish
+    <set>
+      <if test="rubbishName != null">
+        rubbish_name = #{rubbishName,jdbcType=VARCHAR},
+      </if>
+      <if test="rubbishTitle != null">
+        rubbish_title = #{rubbishTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rubbish_id = #{rubbishId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nnljfl.bean.Rubbish">
+    update rubbish
+    set rubbish_name = #{rubbishName,jdbcType=VARCHAR},
+      rubbish_title = #{rubbishTitle,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER}
+    where rubbish_id = #{rubbishId,jdbcType=INTEGER}
+  </update>
+</mapper>

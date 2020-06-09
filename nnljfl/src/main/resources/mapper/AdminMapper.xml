@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nnljfl.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.nnljfl.bean.Admin">
+    <id column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
+    <result column="admin_password" jdbcType="VARCHAR" property="adminPassword" />
+    <result column="admin_phone" jdbcType="VARCHAR" property="adminPhone" />
+    <result column="admin_sex" jdbcType="INTEGER" property="adminSex" />
+    <result column="admin_age" jdbcType="INTEGER" property="adminAge" />
+    <result column="admin_address" jdbcType="VARCHAR" property="adminAddress" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    admin_id, admin_name, admin_password, admin_phone, admin_sex, admin_age, admin_address
+  </sql>
+  <select id="selectByExampleWithPhoneAndPassword" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from admin where admin_phone=#{phone} and admin_password=#{password}
+
+  </select>
+  <select id="selectByExample" parameterType="com.nnljfl.bean.AdminExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nnljfl.bean.AdminExample">
+    delete from admin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nnljfl.bean.Admin">
+    insert into admin (admin_id, admin_name, admin_password, 
+      admin_phone, admin_sex, admin_age, 
+      admin_address)
+    values (#{adminId,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, 
+      #{adminPhone,jdbcType=VARCHAR}, #{adminSex,jdbcType=INTEGER}, #{adminAge,jdbcType=INTEGER}, 
+      #{adminAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nnljfl.bean.Admin">
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="adminName != null">
+        admin_name,
+      </if>
+      <if test="adminPassword != null">
+        admin_password,
+      </if>
+      <if test="adminPhone != null">
+        admin_phone,
+      </if>
+      <if test="adminSex != null">
+        admin_sex,
+      </if>
+      <if test="adminAge != null">
+        admin_age,
+      </if>
+      <if test="adminAddress != null">
+        admin_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="adminName != null">
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null">
+        #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPhone != null">
+        #{adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSex != null">
+        #{adminSex,jdbcType=INTEGER},
+      </if>
+      <if test="adminAge != null">
+        #{adminAge,jdbcType=INTEGER},
+      </if>
+      <if test="adminAddress != null">
+        #{adminAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nnljfl.bean.AdminExample" resultType="java.lang.Long">
+    select count(*) from admin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateAdmin" parameterType="com.nnljfl.bean.Admin">
+  	update admin set admin_name = #{adminName},admin_password=#{adminPassword},
+  	admin_phone=#{adminPhone},admin_sex=#{adminSex},admin_age=#{adminAge},
+  	admin_address=#{adminAddress} where admin_id=#{adminId}
+  </update>
+  <update id="updateByExampleSelective" parameterType="map">
+    update admin
+    <set>
+      <if test="record.adminId != null">
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminName != null">
+        admin_name = #{record.adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminPassword != null">
+        admin_password = #{record.adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminPhone != null">
+        admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminSex != null">
+        admin_sex = #{record.adminSex,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminAge != null">
+        admin_age = #{record.adminAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminAddress != null">
+        admin_address = #{record.adminAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update admin
+    set admin_id = #{record.adminId,jdbcType=INTEGER},
+      admin_name = #{record.adminName,jdbcType=VARCHAR},
+      admin_password = #{record.adminPassword,jdbcType=VARCHAR},
+      admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
+      admin_sex = #{record.adminSex,jdbcType=INTEGER},
+      admin_age = #{record.adminAge,jdbcType=INTEGER},
+      admin_address = #{record.adminAddress,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nnljfl.bean.Admin">
+    update admin
+    <set>
+      <if test="adminName != null">
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null">
+        admin_password = #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPhone != null">
+        admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSex != null">
+        admin_sex = #{adminSex,jdbcType=INTEGER},
+      </if>
+      <if test="adminAge != null">
+        admin_age = #{adminAge,jdbcType=INTEGER},
+      </if>
+      <if test="adminAddress != null">
+        admin_address = #{adminAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nnljfl.bean.Admin">
+    update admin
+    set admin_name = #{adminName,jdbcType=VARCHAR},
+      admin_password = #{adminPassword,jdbcType=VARCHAR},
+      admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      admin_sex = #{adminSex,jdbcType=INTEGER},
+      admin_age = #{adminAge,jdbcType=INTEGER},
+      admin_address = #{adminAddress,jdbcType=VARCHAR}
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+</mapper>

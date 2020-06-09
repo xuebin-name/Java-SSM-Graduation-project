@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nnljfl.dao.TypeModelMapper">
+  <resultMap id="BaseResultMap" type="com.nnljfl.bean.TypeModel">
+    <id column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="type_datil" jdbcType="VARCHAR" property="typeDatil" />
+    <result column="type_include" jdbcType="VARCHAR" property="typeInclude" />
+    <result column="type_k1" jdbcType="VARCHAR" property="typeK1" />
+    <result column="type_k2" jdbcType="VARCHAR" property="typeK2" />
+  </resultMap>
+  <!-- com.atljfl.bean -->
+  <resultMap id="WithThrowResultMap" type="com.nnljfl.bean.TypeModel">
+    <id column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="type_datil" jdbcType="VARCHAR" property="typeDatil" />
+    <result column="type_include" jdbcType="VARCHAR" property="typeInclude" />
+    <result column="type_k1" jdbcType="VARCHAR" property="typeK1" />
+    <result column="type_k2" jdbcType="VARCHAR" property="typeK2" />
+  	<!--联合查询 -->
+  	<collection property="throwClaims" ofType="com.nnljfl.bean.ThrowClaim">
+  			<id column="throw_id" property="throwId"/>
+  			<result column="throw_prompt" property="throwPrompt"/>
+  	</collection>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    type_id, type_name, type_datil, type_include, type_k1, type_k2
+  </sql>
+    <sql id="WithThrow_Column_List">
+    m.type_id, m.type_name, m.type_datil, m.type_include, m.type_k1, m.type_k2,t.throw_id,t.throw_prompt
+  </sql>
+  <!--     List<TypeModel> selectByExampleWithThrow(TypeModelExample example);
+
+    TypeModel selectByPrimaryKeyWithThrow(Integer typeId); -->
+    <!-- 查询分类带投放要求 -->
+  <select id="selectByExampleWithThrow"  resultMap="WithThrowResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="WithThrow_Column_List" />
+    from typemodel m
+    left join throwclaim t on t.type_id=m.type_id
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKeyWithThrow" resultMap="WithThrowResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from typemodel m
+    left join throwclaim t on t.type_id=m.type_id
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByExample" parameterType="com.nnljfl.bean.TypeModelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from typemodel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from typemodel
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from typemodel
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nnljfl.bean.TypeModelExample">
+    delete from typemodel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nnljfl.bean.TypeModel">
+    insert into typemodel (type_id, type_name, type_datil, 
+      type_include, type_k1, type_k2
+      )
+    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{typeDatil,jdbcType=VARCHAR}, 
+      #{typeInclude,jdbcType=VARCHAR}, #{typeK1,jdbcType=VARCHAR}, #{typeK2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nnljfl.bean.TypeModel">
+    insert into typemodel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="typeName != null">
+        type_name,
+      </if>
+      <if test="typeDatil != null">
+        type_datil,
+      </if>
+      <if test="typeInclude != null">
+        type_include,
+      </if>
+      <if test="typeK1 != null">
+        type_k1,
+      </if>
+      <if test="typeK2 != null">
+        type_k2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null">
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeDatil != null">
+        #{typeDatil,jdbcType=VARCHAR},
+      </if>
+      <if test="typeInclude != null">
+        #{typeInclude,jdbcType=VARCHAR},
+      </if>
+      <if test="typeK1 != null">
+        #{typeK1,jdbcType=VARCHAR},
+      </if>
+      <if test="typeK2 != null">
+        #{typeK2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nnljfl.bean.TypeModelExample" resultType="java.lang.Long">
+    select count(*) from typemodel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update typemodel
+    <set>
+      <if test="record.typeId != null">
+        type_id = #{record.typeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.typeName != null">
+        type_name = #{record.typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeDatil != null">
+        type_datil = #{record.typeDatil,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeInclude != null">
+        type_include = #{record.typeInclude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeK1 != null">
+        type_k1 = #{record.typeK1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeK2 != null">
+        type_k2 = #{record.typeK2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update typemodel
+    set type_id = #{record.typeId,jdbcType=INTEGER},
+      type_name = #{record.typeName,jdbcType=VARCHAR},
+      type_datil = #{record.typeDatil,jdbcType=VARCHAR},
+      type_include = #{record.typeInclude,jdbcType=VARCHAR},
+      type_k1 = #{record.typeK1,jdbcType=VARCHAR},
+      type_k2 = #{record.typeK2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nnljfl.bean.TypeModel">
+    update typemodel
+    <set>
+      <if test="typeName != null">
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeDatil != null">
+        type_datil = #{typeDatil,jdbcType=VARCHAR},
+      </if>
+      <if test="typeInclude != null">
+        type_include = #{typeInclude,jdbcType=VARCHAR},
+      </if>
+      <if test="typeK1 != null">
+        type_k1 = #{typeK1,jdbcType=VARCHAR},
+      </if>
+      <if test="typeK2 != null">
+        type_k2 = #{typeK2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nnljfl.bean.TypeModel">
+    update typemodel
+    set type_name = #{typeName,jdbcType=VARCHAR},
+      type_datil = #{typeDatil,jdbcType=VARCHAR},
+      type_include = #{typeInclude,jdbcType=VARCHAR},
+      type_k1 = #{typeK1,jdbcType=VARCHAR},
+      type_k2 = #{typeK2,jdbcType=VARCHAR}
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+</mapper>
